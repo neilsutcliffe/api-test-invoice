@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import HouseList from './Houses';
+import HouseList from './HouseList';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<HouseList />, document.getElementById('root'));

@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Character from '../Character';
 import Attribute from '../components/Attribute'
 import AttributeList from '../components/AttributeList'
 
 const CharacterList = ({label, characters}) => {
-  if (characters.length == 0 || characters[0] == "") return null;
+  if (characters.length === 0 || characters[0] === "") return null;
 
   const mapped = characters.map((character) => <Character url={character} key={characters.indexOf(character)} />)
   return (<>

@@ -30,10 +30,6 @@ const CharacterDetail = (props) => {
 };
 
 class Character extends Component {
-  constructor(props){
-    super(props);
-  }
-
   load() {
     	loadCharacter(this.props.url).then((data) => {
       this.setState(data);

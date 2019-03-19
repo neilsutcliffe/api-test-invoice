@@ -2,9 +2,9 @@
 import House from './House'
 import request from 'superagent';
 import React, {Component} from 'react';
+import config from './config'
 
-
-const loadAllHouses = () => request.get('https://www.anapioficeandfire.com/api/houses')
+const loadAllHouses = () => request.get(config.endpoint)
     .set('Accept', 'application/json')
     .then((res) => JSON.parse(res.text))
 		.then((json) => { return { success: true, data: json }})
@@ -18,8 +18,7 @@ const mapHouses = (data) => Object.keys(data).map((key) => (
 class HouseList extends Component {
 	componentDidMount() {
 	  loadAllHouses().then((data) => {
-			console.log(data);
-		this.setState(data);
+			this.setState(data);
 	  });
 	}
   

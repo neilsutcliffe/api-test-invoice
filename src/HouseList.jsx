@@ -7,7 +7,8 @@ import React, {Component} from 'react';
 const loadAllHouses = () => request.get('https://www.anapioficeandfire.com/api/houses')
     .set('Accept', 'application/json')
     .then((res) => JSON.parse(res.text))
-    .then((json) => json);
+		.then((json) => { return { success: true, data: json }})
+		.catch((err) => { return { success: false, data: err.message }})
 
 
 const mapHouses = (data) => Object.keys(data).map((key) => (
@@ -17,18 +18,21 @@ const mapHouses = (data) => Object.keys(data).map((key) => (
 class HouseList extends Component {
 	componentDidMount() {
 	  loadAllHouses().then((data) => {
+			console.log(data);
 		this.setState(data);
 	  });
 	}
   
 	render() {
-	  if (this.state == null) return <div>Loading...</div>;
+		if (this.state == null) return <div>Loading...</div>;
+		
+		if (!this.state.success) return <div className="alert alert-danger" role="alert">Error: { this.state.data }</div>
   
 	  return (
 		<div className="container">
 		  <h1>List of Houses</h1>
 		  <hr />
-		  { mapHouses(this.state) }
+		  { mapHouses(this.state.data) }
 		</div>
 	  );
 	}
